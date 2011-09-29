@@ -151,7 +151,10 @@ public class Collada extends Base {
 	}
 
 	public void deindexMeshes() {
-		List<Geometry> geos = this.libraryGeometries.getGeometries();
+		if(libraryGeometries == null) {
+			return;
+		}
+		List<Geometry> geos = libraryGeometries.getGeometries();
 		for (Geometry geo : geos) {
 			Mesh mesh = geo.getMesh();
 			if (mesh != null)
