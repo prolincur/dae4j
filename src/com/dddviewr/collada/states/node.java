@@ -5,7 +5,7 @@ import org.xml.sax.Attributes;
 
 import com.dddviewr.collada.State;
 import com.dddviewr.collada.StateManager;
-import com.dddviewr.collada.visualscene.Node;
+import com.dddviewr.collada.nodes.Node;
 
 public class node extends State {
 	protected Node theNode;

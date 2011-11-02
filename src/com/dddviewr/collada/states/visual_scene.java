@@ -4,8 +4,8 @@ import org.xml.sax.Attributes;
 
 import com.dddviewr.collada.State;
 import com.dddviewr.collada.StateManager;
+import com.dddviewr.collada.nodes.Node;
 import com.dddviewr.collada.visualscene.LibraryVisualScenes;
-import com.dddviewr.collada.visualscene.Node;
 import com.dddviewr.collada.visualscene.VisualScene;
 
 public class visual_scene extends State {

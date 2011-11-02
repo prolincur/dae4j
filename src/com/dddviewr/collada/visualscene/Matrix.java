@@ -32,6 +32,8 @@ public class Matrix extends BaseXform {
 		for (String s : values) {
 			if (index >= 16)
 				return;
+			if (s.length() == 0)
+				continue;
 			this.data[(index++)] = Float.parseFloat(s);
 		}
 	}
