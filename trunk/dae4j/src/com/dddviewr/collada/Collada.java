@@ -28,6 +28,9 @@ import com.dddviewr.collada.geometry.Mesh;
 import com.dddviewr.collada.images.Image;
 import com.dddviewr.collada.images.LibraryImages;
 import com.dddviewr.collada.materials.LibraryMaterials;
+import com.dddviewr.collada.materials.Material;
+import com.dddviewr.collada.nodes.LibraryNodes;
+import com.dddviewr.collada.nodes.Node;
 import com.dddviewr.collada.scene.Scene;
 import com.dddviewr.collada.visualscene.LibraryVisualScenes;
 import com.dddviewr.log.Log;
@@ -41,10 +44,12 @@ public class Collada extends Base {
 	protected LibraryImages libraryImages;
 	protected LibraryMaterials libraryMaterials;
 	protected LibraryEffects libraryEffects;
+	protected LibraryNodes libraryNodes;
 	protected Scene scene;
 	
 	protected String authoringTool = "";
 	protected String upAxis = "Z_UP";
+	protected Unit unit;
 	
 	public static XMLReader reader;
 
@@ -104,6 +109,14 @@ public class Collada extends Base {
 		this.libraryEffects = libraryEffects;
 	}
 
+	public LibraryNodes getLibraryNodes() {
+		return libraryNodes;
+	}
+
+	public void setLibraryNodes(LibraryNodes libraryNodes) {
+		this.libraryNodes = libraryNodes;
+	}
+
 	public Scene getScene() {
 		return scene;
 	}
@@ -119,6 +132,14 @@ public class Collada extends Base {
 	public void setUpAxis(String upAxis) {
 		this.upAxis = upAxis;
 	}
+	
+	public Unit getUnit() {
+		return unit;
+	}
+
+	public void setUnit(Unit unit) {
+		this.unit = unit;
+	}
 
 	public String getAuthoringTool() {
 		return authoringTool;
@@ -132,6 +153,8 @@ public class Collada extends Base {
 		String prefix = createIndent(indent);
 		out.println(prefix + "COLLADA");
 		out.println(prefix + " (" + upAxis + ")");
+		if (this.unit != null)
+			this.unit.dump(out, indent + 1);
 		if (this.libraryImages != null)
 			this.libraryImages.dump(out, indent + 1);
 		if (this.libraryMaterials != null)
@@ -140,6 +163,8 @@ public class Collada extends Base {
 			this.libraryEffects.dump(out, indent + 1);
 		if (this.libraryGeometries != null)
 			this.libraryGeometries.dump(out, indent + 1);
+		if (this.libraryNodes != null)
+			this.libraryNodes.dump(out, indent + 1);
 		if (this.libraryControllers != null)
 			this.libraryControllers.dump(out, indent + 1);
 		if (this.libraryAnimations != null)
@@ -245,6 +270,45 @@ public class Collada extends Base {
 		for (Image img : this.libraryImages.getImages()) {
 			if (search.equals(img.getId()))
 				return img;
+		}
+		return null;
+	}
+
+	public Material findMaterial(String id) {
+		if (this.libraryMaterials == null)
+			return null;
+		String search = id;
+		if (id.indexOf(35) == 0)
+			search = id.substring(1);
+		for (Material mat : this.libraryMaterials.getMaterials()) {
+			if (search.equals(mat.getId()))
+				return mat;
+		}
+		return null;
+	}
+
+	public Geometry findGeometry(String id) {
+		if (this.libraryGeometries == null)
+			return null;
+		String search = id;
+		if (id.indexOf(35) == 0)
+			search = id.substring(1);
+		for (Geometry geo : this.libraryGeometries.getGeometries()) {
+			if (search.equals(geo.getId()))
+				return geo;
+		}
+		return null;
+	}
+
+	public Node findNode(String id) {
+		if (this.libraryNodes == null)
+			return null;
+		String search = id;
+		if (id.indexOf(35) == 0)
+			search = id.substring(1);
+		for (Node n : this.libraryNodes.getNodes()) {
+			if (search.equals(n.getId()))
+				return n;
 		}
 		return null;
 	}
