@@ -17,7 +17,7 @@ public class Node extends Base {
 	protected String sid;
 	protected String type;
 	protected List<BaseXform> xforms = new ArrayList<BaseXform>();
-	protected InstanceGeometry instanceGeometry;
+	protected List<InstanceGeometry> instanceGeometry = new ArrayList<InstanceGeometry>();
 	protected InstanceController instanceController;
 	protected InstanceNode instanceNode;
 	protected List<Node> childNodes = new ArrayList<Node>();
@@ -66,12 +66,16 @@ public class Node extends Base {
 		return this.xforms;
 	}
 
-	public InstanceGeometry getInstanceGeometry() {
+	public List<InstanceGeometry> getInstanceGeometry() {
 		return this.instanceGeometry;
 	}
 
-	public void setInstanceGeometry(InstanceGeometry instanceGeometry) {
+	public void setInstanceGeometry(List<InstanceGeometry> instanceGeometry) {
 		this.instanceGeometry = instanceGeometry;
+	}
+	
+	public void addInstanceGeometry(InstanceGeometry instanceGeometry) {
+		this.instanceGeometry.add(instanceGeometry);
 	}
 
 	public InstanceController getInstanceController() {
@@ -115,8 +119,9 @@ public class Node extends Base {
 		for (BaseXform xform : this.xforms) {
 			xform.dump(out, indent + 1);
 		}
-		if (this.instanceGeometry != null)
-			this.instanceGeometry.dump(out, indent + 1);
+		for (InstanceGeometry geom : this.instanceGeometry) {
+			geom.dump(out, indent + 1);
+		}
 		if (this.instanceController != null)
 			this.instanceController.dump(out, indent + 1);
 		if (this.instanceNode != null)

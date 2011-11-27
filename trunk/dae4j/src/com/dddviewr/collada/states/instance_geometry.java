@@ -15,7 +15,7 @@ public class instance_geometry extends State {
 		super.init(name, attrs, mngr);
 		this.instanceGeometry = new InstanceGeometry(attrs.getValue("url"));
 		Node node = ((node) getParent()).getNode();
-		node.setInstanceGeometry(this.instanceGeometry);
+		node.addInstanceGeometry(this.instanceGeometry);
 	}
 
 	public InstanceGeometry getInstanceGeometry() {
