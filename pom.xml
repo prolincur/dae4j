@@ -13,6 +13,31 @@
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>com.diffplug.spotless</groupId>
+				<artifactId>spotless-maven-plugin</artifactId>
+				<version>2.9.0</version>
+				<configuration>
+					<java>
+						<googleJavaFormat>
+							<style>GOOGLE</style>
+						</googleJavaFormat>
+						<removeUnusedImports />
+						<importOrder>
+							<order>scala,java,javax,org,com,au</order>
+						</importOrder>
+					</java>
+				</configuration>
+				<executions>
+					<execution>
+						<id>diffplug.spotless-checks</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>apply</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.2</version>
