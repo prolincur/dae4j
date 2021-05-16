@@ -12,3 +12,16 @@ This is a new home of this wonderful Java Library in GitHub.
 -  Skin Controller
 -  Animation
 -  De-indexing
+
+
+### Installation
+
+Add following to `pom.xml` file of your `maven` project. See ["Introduction to the POM"](https://maven.apache.org/guides/introduction/introduction-to-the-pom.html) in the Apache Maven documentation.
+
+```xml
+<dependency>
+  <groupId>com.dddviewr</groupId>
+  <artifactId>dae4j</artifactId>
+  <version>1.8.0</version>
+</dependency>
+```
